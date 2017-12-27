@@ -13,7 +13,7 @@
 
 *   在你项目的直播功能js文件中：
 
-  *  import {RtcEngine, ILiveView} from './src/index';
+  *  import {RtcEngine, ILiveView} from 'react-native-ilive';
 
   *  componentWillMount中初始化直播引擎：
    ```
