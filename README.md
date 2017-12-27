@@ -3,133 +3,13 @@
 | ------------- |:---------------:|
 | gufei         | 799170694@qq.com|
 
-*  不断更新优化中<br>
-iOS编译过程中若出现错误，请联系我发ILiveSDK.framework的最新库，此库腾讯官方可能尚未更新上去。
 
-# react-native-ilive
-*  基于腾讯互动直播封装成react-native组件
-*  封装android、iOS两大平台
-*  目前实现功能：创建房间、加入房间、切换角色、上下麦、切换摄像头、开关摄像头、开关声麦、录视频流、录屏幕、基础美颜
-*  待实现功能：屏幕分享、连麦窗口可定制化
+# RNILiveExample
+[react-native-ilive](https://github.com/midas-gufei/react-native-ilive)
 
-### Android
+### 实例代码说明：
 
-* 将android/react-native-ilive拷贝到自己项目的android目录下
-
-* 在android/settings.gradle文件中新增：':react-native-ilive'依赖
-
-* 在android/app/build.gradle文件的dependencies中添加：compile project(path: ':react-native-ilive')
-
-* 在android/app/src/main/AndroidMainfest.xml中添加权限：
-```
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
-    <uses-permission android:name="android.permission.MANAGE_ACCOUNTS" />
-    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
-    <uses-permission android:name="android.permission.GET_TASKS" />
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
-    <uses-permission android:name="android.permission.READ_LOGS" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-    <uses-permission android:name="android.permission.RECORD_AUDIO" />
-    <uses-permission android:name="android.permission.VIBRATE" />
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.BLUETOOTH" />
-    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
-    <uses-permission android:name="android.permission.BROADCAST_STICKY" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
-```
-*  application下添加：
-```
-    <provider
-            android:name="android.support.v4.content.FileProvider"
-            android:authorities="com.tencent.qcloud.suixinbo.fileProvider"
-            android:exported="false"
-            android:grantUriPermissions="true">
-            <meta-data
-                android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_paths" />
-    </provider>
-```
-* MainApplication.java文件：
-  *  extends QavsdkApplication
-  *  getPackages()方法中添加new ILivePackage()
-
-### iOS
-
-* 将ios/RCTILive拷贝到自己项目中
-
-* 运行ios/RCTILive/Frameworks/LoadSDK.sh，下载工程需要的资源库，仅保留AVSDK、ILiveSDK、IMSDK三个文件夹（！！多余的文件/文件夹删除）
-* 下载美颜插件：http://dldir1.qq.com/hudongzhibo/ILiveSDK/TXMVideoPreprocessor_3.3.0.zip
-  解压至ios/RCTILive/Frameworks/文件夹下，保留basic文件夹（基础美颜，免费），删除advance文件夹（高级美颜需付费）。
-* 修改工程配置
-
-  *  将下载好的SDK复制到工程目录下，工程目录右键，Add Files to " you projectname"
-
-  *  Build Settings/Linking/Other Linker Flags，增加 -ObjC 配置
-
-  *  Build Settings/Linking/Bitcode，增加 Bitcode 配置，设置为NO
-
-  *  iOS10及以上系统，需在Info.plist中增加设备访问权限配置
-  ![](http://mc.qcloudimg.com/static/img/e7b7897cb79a5cb9a984938dd4b3fda3/image.png)
-
-
-* 添加系统库
-    需要增加的系统库
-    *  libc++.tbd
-    *  libstdc++.tbd
-    *  libstdc++.6.tbd
-    *  libz.tbd
-    *  libbz2.tbd
-    *  libiconv.tbd
-    *  libresolv.tbd
-    *  libsqlite3.tbd
-    *  libprotobuf.tbd
-    *  UIKit.framework
-    *  CoreVideo.framework
-    *  CoreMedia.framework
-    *  Accelerate.framework
-    *  Foundation.framework
-    *  AVFoundation.framework
-    *  VideoToolbox.framework
-    *  CoreGraphics.framework
-    *  CoreTelephony.framework
-    *  SystemConfiguration.framework
-    *  OpenAL.framework
-
-* 点击项目->TARGETS/Build Settings/Prefix Header->添加your_projectname/RCTILive/TILLiveSDKShow-Prefix.pch
-
-* ReactNativeILive/AppDelegate.m文件修改：
- ```
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-  // start 腾讯互动直播环境初始化
-  TIMManager *manager = [[ILiveSDK getInstance] getTIMManager];
-  NSNumber *evn = [[NSUserDefaults standardUserDefaults] objectForKey:kEnvParam];
-  [manager setEnv:[evn intValue]];
-  NSNumber *logLevel = [[NSUserDefaults standardUserDefaults] objectForKey:kLogLevel];
-  if (!logLevel) {
-    [[NSUserDefaults standardUserDefaults] setObject:@(TIM_LOG_DEBUG) forKey:kLogLevel];
-    logLevel = @(TIM_LOG_DEBUG);
-  }
-  [manager initLogSettings:YES logPath:[manager getLogPath]];
-  [manager setLogLevel:(TIMLogLevel)[logLevel integerValue]];
-  // end
-  ........
-}
- ```
-
-### react-native代码配置如下：
-
-*   将react-native-ilive.git/src下的ILiveView、index、RtcEngine三个文件拷贝到你的项目相应目录下
+*   将ILiveView、index、RtcEngine三个文件拷贝到你的项目相应目录下
 
 *   在你项目的直播功能js文件中：
 
