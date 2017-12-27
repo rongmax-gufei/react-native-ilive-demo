@@ -5,7 +5,7 @@
 
 
 # RNILiveExample
-[react-native-ilive](https://github.com/midas-gufei/react-native-ilive)
+[react-native-ilive源码](https://github.com/midas-gufei/react-native-ilive)
 
 ### 实例代码说明：
 
