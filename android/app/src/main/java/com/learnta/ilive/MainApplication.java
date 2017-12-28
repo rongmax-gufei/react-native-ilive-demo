@@ -6,7 +6,7 @@ import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
 import com.tencent.qcloud.app.QavsdkApplication;
-import com.tencent.qcloud.nativemodule.ILivePackage;
+import com.tencent.qcloud.ILivePackage;
 
 import java.util.Arrays;
 import java.util.List;
