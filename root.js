@@ -54,8 +54,8 @@ export default class ReactNativeILive extends Component {
                 if (result) {
                     // 自己创建直播间 hostId=自己的id,roomNum=自己的房间号,清晰度（HD、SD、LD）
                     // 加入别人的房间 hostId=主播的id,roomNum=主播的房间号,userRole=0(1:主播、0:观众),清晰度（Guest、Guest2）
-                    RtcEngine.iLiveCreateRoom('learnta111', 779999, 'HD');
-                    // RtcEngine.iLiveJoinRoom('learnta111', 779999, 0, 'Guest');
+                    RtcEngine.iLiveCreateRoom('learnta111', 909990, 'HD');
+                    // RtcEngine.iLiveJoinRoom('learnta111', 909990, 0, 'Guest');
                 }
             },
             onLogoutTLS: (data) => {
@@ -125,6 +125,18 @@ export default class ReactNativeILive extends Component {
                     bMicOn: result
                 });
             },
+            // 开始采集房间信息
+            onParOn: (data) => {
+                console.log(data);
+            },
+            // 结束采集房间信息
+            onParOff: (data) => {
+                console.log(data);
+            },
+            // 测速
+            onNetSpeedTest: (data) => {
+                console.log(data);
+            },
             onError: (data) => {
                 console.log(data);
                 // 错误!
@@ -133,7 +145,6 @@ export default class ReactNativeILive extends Component {
     }
 
     handerLeavelRoom() {
-        console.log('handerLeavelRoom');
         // 通知腾讯TLS服务器
         RtcEngine.iLiveLeaveRoom();
         // 移除监听事件
@@ -141,37 +152,30 @@ export default class ReactNativeILive extends Component {
     };
 
     handlerChangeRole(role) {
-      console.log('handlerChangeRole');
       RtcEngine.iLiveChangeRole(role);
     };
 
     handlerUpVideo(uid) {
-        console.log('handlerUpVideo');
         RtcEngine.iLiveUpVideo(uid);
     };
 
     handlerDownVideo(uid) {
-        console.log('handlerDownVideo');
         RtcEngine.iLiveDownVideo(uid);
     };
 
     handlerStartVideoRecord (fileName, recordType) {
-        console.log('handlerStartVideoRecord');
         RtcEngine.iLiveStartVideoRecord(fileName, recordType);
     };
 
     handlerStopVideoRecord() {
-        console.log('handlerStopVideoRecord');
         RtcEngine.iLiveStopVideoRecord();
     };
 
     handlerStartScreenRecord () {
-        console.log('handlerStartScreenRecord');
         RtcEngine.iLiveStartScreenRecord();
     };
 
     handlerStopScreenRecord() {
-        console.log('handlerStopScreenRecord');
         RtcEngine.iLiveStopScreenRecord();
     };
 
@@ -185,6 +189,18 @@ export default class ReactNativeILive extends Component {
 
     handlerToggleMic =(bMicOn) => {
         RtcEngine.iLiveToggleMic(bMicOn);
+    };
+
+    handlerOParOff =() => {
+        RtcEngine.iLiveParOn();
+    };
+
+    handlerParOff =() => {
+        RtcEngine.iLiveParOff();
+    };
+
+    handlerNetSpeedTest =() => {
+        RtcEngine.iLiveNetSpeedTest();
     };
 
     render() {
@@ -208,6 +224,18 @@ export default class ReactNativeILive extends Component {
                                 <TouchableHighlight style={styles.btn} underlayColor={'#ff0000'}
                                   onPress={this.handlerDownVideo.bind(this, 'ruby')}>
                                   <Text style={styles.btnText}>下麦</Text>
+                                </TouchableHighlight>
+                                <TouchableHighlight style={styles.btn} underlayColor={'#ff0000'}
+                                                    onPress={this.handlerUpVideo.bind(this, 'ruby')}>
+                                    <Text style={styles.btnText}>采集</Text>
+                                </TouchableHighlight>
+                                <TouchableHighlight style={styles.btn} underlayColor={'#ff0000'}
+                                                    onPress={this.handlerDownVideo.bind(this, 'ruby')}>
+                                    <Text style={styles.btnText}>结束</Text>
+                                </TouchableHighlight>
+                                <TouchableHighlight style={styles.btn} underlayColor={'#ff0000'}
+                                                    onPress={this.handlerUpVideo.bind(this, 'ruby')}>
+                                    <Text style={styles.btnText}>测网速</Text>
                                 </TouchableHighlight>
                             </View>
                         </View>
@@ -258,6 +286,7 @@ const styles = StyleSheet.create({
         padding: 20,
         flexDirection: 'row',
         justifyContent: 'space-around',
+        backgroundColor: '#F4F4F4'
     },
     btn: {
         width: 100,
