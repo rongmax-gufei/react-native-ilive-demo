@@ -7,11 +7,6 @@
 # RNILiveExample
 [react-native-ilive 源码](https://github.com/midas-gufei/react-native-ilive)
 
-# 运行命令：
-*   android => cd android && ./gradlew installRelease or react-native run-android
-*   iOS => xcode点击run or react-native run-ios
-*   ps：请使用真机运行
-
 ### 实例代码说明：
 
 *   将ILiveView、index、RtcEngine三个文件拷贝到你的项目相应目录下
@@ -188,4 +183,15 @@ handlerToggleMic =(bMicOn) => {
 *  render()中添加直播component
  ```
   <ILiveView style={styles.localView} showVideoView={true}/>
+ ```
+ 
+ ### 运行命令：
+ 
+*  android
+ ```
+    cd android && ./gradlew installRelease or react-native run-android
+ ```
+*  iOS
+ ```
+    xcode点击run or react-native run-ios
  ```
