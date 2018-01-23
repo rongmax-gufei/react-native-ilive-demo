@@ -22,8 +22,11 @@
       appid: '1400027849',
       accountType: '11656'
   };
-  RtcEngine.init(options);
-  // 添加AVListener，此方法必须在rn的componentWillMount()方法中执行，render()之前执行
+  RtcEngine.init(options);
+  
+  // ！！！ps：android环境的appid和accountType，请在原生代码的Constants.java中修改
+  
+  // 添加AVListener，此方法必须在rn的componentWillMount()方法中执行，render()之前执行
   RtcEngine.iLiveSetAVListener();
  ```
 *  componentDidMount中先登录腾讯的TLS系统,use id&&sig（自己服务器端生成）
