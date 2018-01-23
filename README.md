@@ -189,9 +189,9 @@ handlerToggleMic =(bMicOn) => {
  
 *  android
  ```
-    cd android && ./gradlew installRelease or react-native run-android
+  cd android && ./gradlew installRelease or react-native run-android
  ```
 *  iOS
  ```
-    xcode点击run or react-native run-ios
+  xcode点击run or react-native run-ios
  ```
