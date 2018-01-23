@@ -225,18 +225,6 @@ export default class ReactNativeILive extends Component {
                                   onPress={this.handlerDownVideo.bind(this, 'ruby')}>
                                   <Text style={styles.btnText}>下麦</Text>
                                 </TouchableHighlight>
-                                <TouchableHighlight style={styles.btn} underlayColor={'#ff0000'}
-                                                    onPress={this.handlerUpVideo.bind(this, 'ruby')}>
-                                    <Text style={styles.btnText}>采集</Text>
-                                </TouchableHighlight>
-                                <TouchableHighlight style={styles.btn} underlayColor={'#ff0000'}
-                                                    onPress={this.handlerDownVideo.bind(this, 'ruby')}>
-                                    <Text style={styles.btnText}>结束</Text>
-                                </TouchableHighlight>
-                                <TouchableHighlight style={styles.btn} underlayColor={'#ff0000'}
-                                                    onPress={this.handlerUpVideo.bind(this, 'ruby')}>
-                                    <Text style={styles.btnText}>测网速</Text>
-                                </TouchableHighlight>
                             </View>
                         </View>
                     </View>
