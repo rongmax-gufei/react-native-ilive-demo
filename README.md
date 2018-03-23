@@ -4,7 +4,7 @@
 | gufei         | 799170694@qq.com|
 
 
-# RNILiveExample
+# React Native ILive Demo
 [react-native-ilive 源码](https://github.com/midas-gufei/react-native-ilive)
 
 ### 实例代码说明：
